@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EliteSoftwareTech.cc :: Information-First Software Engineering</title>
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/85mKDbX8/EliteSoftware-Company-Logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;700&family=Arial:wght@400;700&display=swap" rel="stylesheet">
     <style>
         /* --- Aero Design Tokens --- */
@@ -363,6 +364,8 @@
             <!-- Navigation Tabs -->
             <nav class="nav-strip">
                 <button class="nav-btn active" onclick="showPage('home')">Welcome Station</button>
+                <button class="nav-btn" onclick="showPage('services')">ENGINEERING SERVICES</button>
+                <button class="nav-btn" onclick="showPage('projects')">PROJECT ARCHIVE</button>
                 <button class="nav-btn" onclick="showPage('contact')">DIRECT LIAISON</button>
             </nav>
 
@@ -406,20 +409,71 @@
                         </div>
                     </div>
 
+                    <div id="page-services" class="page-view" style="display:none;">
+                        <div class="glass-box">
+                            <div class="box-header">Engineering Capabilities & Consultative Services</div>
+                            <div class="box-body">
+                                <div class="info-section">
+                                    <h3>Windows Core Customization</h3>
+                                    <p>Surgical OS alterations through Windhawk mods and registry-level hardening. We specialize in restoring the skeuomorphic peak of the Aero era while maintaining 2026 performance standards.</p>
+                                </div>
+                                <div class="info-section">
+                                    <h3>PowerShell Automation Suites</h3>
+                                    <p>End-to-end automation for workstation deployment, system telemetry, and resource management. If it can be typed, it can be automated.</p>
+                                </div>
+                                <div class="info-section">
+                                    <h3>Information Architecture</h3>
+                                    <p>Designing high-density data environments that prioritize user agency and rapid information retrieval over "clean" (empty) aesthetics.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="page-projects" class="page-view" style="display:none;">
+                        <div class="glass-box">
+                            <div class="box-header">Active Project Archive</div>
+                            <div class="box-body">
+                                <div class="info-section">
+                                    <h3>Aerexplorer v2.1</h3>
+                                    <p>A comprehensive shell replacement project focused on bringing back the high-gloss, high-utility UI of the late 2000s to modern Windows kernels.</p>
+                                </div>
+                                <div class="info-section">
+                                    <h3>System Purity Toolset</h3>
+                                    <p>A collection of scripts and binaries designed to purge OEM telemetry and restore absolute system control to the end user.</p>
+                                </div>
+                                <div class="info-section">
+                                    <h3>DENSE-UI Framework</h3>
+                                    <p>A CSS/JS library for building modern skeuomorphic applications with a focus on information density and visual depth.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div id="page-contact" class="page-view" style="display:none;">
                         <div class="glass-box">
                             <div class="box-header">DIRECT LIAISON PROTOCOL</div>
                             <div class="box-body">
-                                <p>Establish a secure communication channel with EliteSoftwareTech.cc below. All traffic is monitored for system integrity.</p>
+                                <p style="margin-bottom: 20px;">Establish a secure communication channel with EliteSoftwareTech.cc below. All traffic is monitored for system integrity.</p>
                                 
-                                <div class="terminal-box">
-                                    <strong>Tier 1: General Operations & Support</strong>
-                                    <code>support@elitesoftwaretech.cc</code>
-                                </div>
+                                <form id="contact-form" onsubmit="handleContact(event)" style="display: flex; flex-direction: column; gap: 15px; background: rgba(0,0,0,0.05); padding: 20px; border-radius: 8px; border: 1px solid #bccad6;">
+                                    <div style="display: flex; gap: 15px;">
+                                        <input type="text" placeholder="IDENTITY (NAME)" required style="flex: 1; padding: 10px; border-radius: 4px; border: 1px solid #99aac0; font-family: 'Segoe UI'; font-weight: 700;">
+                                        <input type="email" placeholder="COMMS NODE (EMAIL)" required style="flex: 1; padding: 10px; border-radius: 4px; border: 1px solid #99aac0; font-family: 'Segoe UI'; font-weight: 700;">
+                                    </div>
+                                    <textarea placeholder="TRANSMISSION DATA (MESSAGE)" required style="height: 120px; padding: 10px; border-radius: 4px; border: 1px solid #99aac0; font-family: 'Segoe UI'; font-weight: 700; resize: vertical;"></textarea>
+                                    <button type="submit" class="elite-button" style="align-self: flex-start;">EXECUTE TRANSMISSION</button>
+                                </form>
 
-                                <div class="terminal-box" style="border-left: 5px solid #2980b9; margin-top: 15px;">
-                                    <strong>Tier 2: Direct Liaison (Zachary Whiteman)</strong>
-                                    <code>zachary.whiteman@elitesoftwaretech.cc</code>
+                                <div style="margin-top: 30px;">
+                                    <div class="terminal-box">
+                                        <strong>Tier 1: General Operations & Support</strong>
+                                        <code>support@elitesoftwaretech.cc</code>
+                                    </div>
+
+                                    <div class="terminal-box" style="border-left: 5px solid #2980b9; margin-top: 15px;">
+                                        <strong>Tier 2: Direct Liaison (Zachary Whiteman)</strong>
+                                        <code>zachary.whiteman@elitesoftwaretech.cc</code>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -430,6 +484,13 @@
                 <!-- Right Sidebar Column -->
                 <aside class="sidebar-column">
                     
+                    <div class="sidebar-module">
+                        <h4>🕒 System Time</h4>
+                        <div id="system-clock" style="font-family: 'Consolas', monospace; font-size: 24px; color: #003b75; text-align: center; font-weight: 700; text-shadow: 0 1px 0 #fff; background: rgba(255,255,255,0.5); border-radius: 4px; border: 1px solid #99aac0; padding: 5px 0;">
+                            00:00:00
+                        </div>
+                    </div>
+
                     <div class="sidebar-module">
                         <h4>📡 Latest Telemetry</h4>
                         <ul style="list-style: none; font-size: 11px; line-height: 1.4;">
@@ -496,6 +557,25 @@
     </div>
 
     <script>
+        function updateClock() {
+            const now = new Date();
+            const timeStr = now.getHours().toString().padStart(2, '0') + ':' + 
+                          now.getMinutes().toString().padStart(2, '0') + ':' + 
+                          now.getSeconds().toString().padStart(2, '0');
+            const clockEl = document.getElementById('system-clock');
+            if(clockEl) clockEl.textContent = timeStr;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        function handleContact(e) {
+            e.preventDefault();
+            document.getElementById('modal-title').textContent = "Transmission Successful";
+            document.getElementById('modal-message').textContent = "Your liaison request has been encrypted and queued for processing. Zachary Whiteman will be notified.";
+            document.getElementById('elite-modal').style.display = 'flex';
+            e.target.reset();
+        }
+
         function showPage(pageId) {
             document.querySelectorAll('.page-view').forEach(p => p.style.display = 'none');
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
