@@ -603,23 +603,26 @@
                                 <div class="info-section">
                                     <h3>Re-engineering the Windows Vista Control Panel with pywin32</h3>
                                     <p>An in-depth look at hooking into legacy control panel applets using python libraries to restore skeuomorphic interfaces.</p>
-                                    <button class="elite-button" style="margin-top: 10px;">Read Archive</button>
+                                    <button class="elite-button" style="margin-top: 10px;" onclick="openArchive('vista-cp')">Read Archive</button>
                                 </div>
                                 <div class="info-section">
                                     <h3>Windows 10 LTSC Vista Theme Builds</h3>
                                     <p>Comprehensive guide to stripping Windows 10 LTSC and applying persistent Aero Glass themes securely.</p>
-                                    <button class="elite-button" style="margin-top: 10px;">Read Archive</button>
+                                    <button class="elite-button" style="margin-top: 10px;" onclick="openArchive('ltsc-aero')">Read Archive</button>
                                 </div>
                                 <div class="info-section">
-                                    <h3>Replicating Reunion 7 Windows UI Mods</h3>
-                                    <p>Studying the Reunion 7 alternative UI paradigms to adapt modern Windows shells into workstation-grade designs.</p>
-                                    <button class="elite-button" style="margin-top: 10px;">Read Archive</button>
+                                    <h3>Creating Your First Application in Python</h3>
+                                    <p>A foundational guide to Python engineering, from basic indentation to PostgreSQL database integration.</p>
+                                    <button class="elite-button" style="margin-top: 10px;" onclick="openArchive('python-app')">Read Archive</button>
                                 </div>
                                 <div class="info-section" style="border-bottom: none;">
                                     <h3>A Novice's Guide to the Microsoft Management Console</h3>
                                     <p>Mastering MMC snap-ins to control local policies and node security without telemetry interference.</p>
-                                    <button class="elite-button" style="margin-top: 10px;">Read Archive</button>
+                                    <button class="elite-button" style="margin-top: 10px;" onclick="openArchive('mmc-guide')">Read Archive</button>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
                             </div>
                         </div>
                     </div>
@@ -750,19 +753,45 @@
 
     <!-- System Modal -->
     <div id="elite-modal" class="modal-overlay" style="position: fixed; inset: 0; background: rgba(0,25,60,0.7); backdrop-filter: blur(20px); display: none; align-items: center; justify-content: center; z-index: 9999;">
-        <div class="glass-box" style="width: 420px; margin: 0;">
+        <div class="glass-box" style="width: 800px; max-width: 90%; max-height: 85vh; display: flex; flex-direction: column; margin: 0;">
             <div class="box-header" id="modal-title">System Message</div>
-            <div class="box-body" style="text-align: center; padding: 25px;">
+            <div class="box-body" id="modal-content-area" style="padding: 25px; overflow-y: auto; flex-grow: 1; background: #fff;">
                 <p id="modal-message" style="font-size: 16px;">Process completed successfully.</p>
-                <div style="margin-top: 20px; display: flex; justify-content: flex-end; gap: 10px;">
-                    <button class="elite-button" onclick="closeModal()">Of Course</button>
-                    <button class="elite-button" style="background: linear-gradient(to bottom, #f55 0%, #d33 50%, #b11 50%, #900 100%); border-color: #600;" onclick="closeModal()">No Way!</button>
-                </div>
+            </div>
+            <div style="padding: 15px; background: #f0f5fa; border-top: 1px solid #ccc; display: flex; justify-content: flex-end; gap: 10px;">
+                <button class="elite-button" onclick="closeModal()">Close Console</button>
             </div>
         </div>
     </div>
 
     <script>
+        const archiveData = {
+            'vista-cp': {
+                title: 'Archive: Re-engineering the Windows Vista Control Panel',
+                content: `<h3>Skeuomorphic Hooking Analysis</h3><p>Research into <strong>pywin32</strong> and <strong>ctypes</strong> has revealed a method to invoke legacy CPL files directly while bypassing modern Immersive Control Panel redirections. By surgically targeting <code>shell32.dll</code>, we can restore the classic applet behaviors...</p><p>Technical Stack: Python 3.11, Win32 API, DLL Injection. [DOC LOADED FROM LOCAL ARCHIVE]`
+            },
+            'ltsc-aero': {
+                title: 'Archive: Windows 10 LTSC Vista Theme Builds',
+                content: `<h3>Hardening & Aesthetics</h3><p>This document outlines the protocol for stripping <strong>Windows 10 IOT LTSC</strong> of its modern telemetry layers and implementing <strong>SecureUXTheme</strong>. By using <strong>Windhawk</strong> modules for taskbar transparency, we can replicate the 2008 workstation feel without compromising kernel integrity.</p>`
+            },
+            'python-app': {
+                title: 'Archive: Creating Your First Application in Python',
+                content: `<h3>Foundational Engineering Protocol</h3><p>Python was developed for the sole purpose of simplifying the process of learning a programming language. In this article, we build a Python Application using <strong>PostgreSQL</strong> integration.</p><pre>import psycopg2\ndb_conn = psycopg2.connect("host=localhost dbname=test_db user=postgres")</pre><p>This archive details the complete pipeline from indentation standards to database commit logic.</p>`
+            },
+            'mmc-guide': {
+                title: 'Archive: Novice Guide to Microsoft Management Console',
+                content: `<h3>System Control via Snap-ins</h3><p>The <strong>MMC</strong> remains the core of Windows system administration. This guide masters the use of <code>gpedit.msc</code> and <code>services.msc</code> to ensure absolute node purity. By disabling unnecessary services and locking down local security policies, we achieve maximum workstation performance.</p>`
+            }
+        };
+
+        function openArchive(id) {
+            const data = archiveData[id];
+            if(!data) return;
+            document.getElementById('modal-title').textContent = data.title;
+            document.getElementById('modal-content-area').innerHTML = `<div class="info-section">${data.content}</div>`;
+            document.getElementById('elite-modal').style.display = 'flex';
+        }
+
         function updateClock() {
             const now = new Date();
             const timeStr = now.getHours().toString().padStart(2, '0') + ':' + 
@@ -855,29 +884,58 @@
         }
 
         function openSystemModal() {
-            document.getElementById('elite-modal').style.display = 'flex';
+            const modal = document.getElementById('elite-modal');
+            const content = document.getElementById('modal-content-area');
+            const title = document.getElementById('modal-title');
+            
+            modal.style.display = 'flex';
+            title.textContent = "SYSTEM PROBE INITIATED";
+            content.innerHTML = `
+                <p style="margin-bottom: 10px; font-weight: 800;">Executing deep-layer hardware handshake...</p>
+                <div style="width: 100%; height: 20px; background: #ddd; border-radius: 4px; overflow: hidden; border: 1px solid #aaa; box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);">
+                    <div id="probe-progress" style="width: 0%; height: 100%; background: linear-gradient(to bottom, #ff00ff, #990099); transition: width 0.1s linear;"></div>
+                </div>
+                <p id="probe-status" style="font-size: 11px; margin-top: 10px; color: #666; font-family: monospace;">[WAITING]</p>
+            `;
+
+            let p = 0;
+            const statusMsgs = ["ALLOCATING BUFFERS", "BYPASSING KERNEL HOOKS", "READING CMOS", "VERIFYING PURE STATE", "HANDSHAKE COMPLETE"];
+            const interval = setInterval(() => {
+                p += Math.random() * 5;
+                if(p >= 100) {
+                    p = 100;
+                    clearInterval(interval);
+                    document.getElementById('probe-status').textContent = "[SUCCESS] NODE SECURED.";
+                } else {
+                    document.getElementById('probe-progress').style.width = p + '%';
+                    document.getElementById('probe-status').textContent = "[" + statusMsgs[Math.floor(p/25)] + "]";
+                }
+            }, 50);
         }
 
         function runDiagnostics() {
             const log = document.getElementById('diagnostics-log');
-            log.textContent = "[INIT] Starting Elite Diagnostics v6.0.0...\n";
-            let lines = [
-                "[SCAN] Checking Browser Integrity... OK",
-                "[SCAN] Verifying Node Status... ACTIVE (v20.x detected)",
-                "[SCAN] Pinging Penn Yan Relay... 12ms",
-                "[SCAN] Testing Aero Transparency... 100% BLUR",
-                "[SCAN] Validating System Purity... NOMINAL",
-                "[SUCCESS] All systems operational. System Purity at 99.9%."
+            log.textContent = "[INIT] FETCHING REAL-TIME NODE TELEMETRY...\n";
+            
+            const telemetry = [
+                `[SCAN] OS/BROWSER: ${navigator.userAgent.split(') ')[0].split('(')[1]}`,
+                `[SCAN] RESOLUTION: ${screen.width}x${screen.height} @ ${screen.colorDepth}-bit`,
+                `[SCAN] LOGICAL CORES: ${navigator.hardwareConcurrency || 'UNKNOWN'}`,
+                `[SCAN] DEVICE MEMORY: ~${navigator.deviceMemory || 'UNKNOWN'} GB`,
+                `[SCAN] NETWORK TYPE: ${navigator.connection ? navigator.connection.effectiveType.toUpperCase() : 'ETHERNET/STATIONARY'}`,
+                `[SCAN] LANG PREFERENCE: ${navigator.language}`,
+                `[SUCCESS] TELEMETRY CAPTURED. NODE IS PURITY-COMPLIANT.`
             ];
+
             let i = 0;
             const interval = setInterval(() => {
-                if (i < lines.length) {
-                    log.textContent += lines[i] + "\n";
+                if (i < telemetry.length) {
+                    log.textContent += telemetry[i] + "\n";
                     i++;
                 } else {
                     clearInterval(interval);
                 }
-            }, 500);
+            }, 300);
         }
 
         async function startSpeedTest() {
