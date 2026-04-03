@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EliteSoftwareTech.cc :: Information-First Software Engineering</title>
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;700&family=Arial:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- Aero Design Tokens --- */
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.45);
+            --glass-border: rgba(255, 255, 255, 0.7);
+            --vista-blue-top: #72b0e8;
+            --vista-blue-mid: #4e92d2;
+            --vista-blue-bottom: #2578c1;
+            --vista-blue-dark: #1a5ea3;
+            --radius-ui: 10px; /* Reduced for tighter density */
+        }
+
+        * { 
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* --- Desktop Hard-Lock --- */
+        html, body {
+            min-width: 1280px; 
+            background-color: #002d5a;
+            height: 100%;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 180, 255, 0.6) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 255, 150, 0.3) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(100, 150, 255, 0.4) 0%, transparent 100%),
+                url('https://www.transparenttextures.com/patterns/pinstriped-suit.png');
+            background-attachment: fixed;
+            color: #111;
+            font-size: 13px; /* Smaller base font for density */
+            overflow-y: scroll; /* Single global scrollbar */
+            line-height: 1.4; /* Tighter line height */
+        }
+
+        /* --- Full-Screen Sharp Container --- */
+        .app-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .main-container {
+            width: 100%;
+            min-height: 100vh;
+            background: var(--glass-bg);
+            backdrop-filter: blur(45px) saturate(220%);
+            -webkit-backdrop-filter: blur(45px) saturate(220%);
+            display: flex;
+            flex-direction: column;
+            border-radius: 0; /* Sharp outer container lock */
+            border: none;
+            box-shadow: 0 0 100px rgba(0,0,0,0.5);
+        }
+
+        /* --- Header: Compact Vista Gloss --- */
+        header {
+            background: linear-gradient(to bottom, rgba(255,255,255,0.98) 0%, rgba(215,230,250,0.95) 100%);
+            padding: 10px 25px; /* Reduced padding */
+            border-bottom: 1px solid rgba(0,0,0,0.3);
+            flex-shrink: 0;
+            z-index: 100;
+        }
+
+        .header-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1800px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .corporate-logo {
+            height: 65px; /* Smaller logo for density */
+            width: auto;
+            filter: drop-shadow(0 3px 6px rgba(0,0,0,0.4));
+        }
+
+        .brand-text h1 {
+            font-size: 30px; /* Scaled down */
+            font-weight: 700;
+            color: #003b75;
+            letter-spacing: -1.5px;
+            text-shadow: 0 1px 0 #fff;
+            line-height: 1;
+        }
+
+        .brand-text p {
+            font-size: 11px;
+            color: #4a5a6a;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 2px;
+        }
+
+        /* --- Navigation Strips --- */
+        .nav-strip {
+            background: linear-gradient(to bottom, #d8e6f5 0%, #adbcca 100%);
+            border-bottom: 1px solid #6a7a8a;
+            padding: 0 25px;
+            display: flex;
+            gap: 4px;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+            z-index: 90;
+        }
+
+        .nav-btn {
+            background: linear-gradient(to bottom, #f0f5fa, #d0dbe9);
+            border: 1px solid #8da1b5;
+            border-bottom: none;
+            padding: 6px 25px; /* Tighter buttons */
+            font-weight: 700;
+            color: #334455;
+            cursor: pointer;
+            font-size: 12px;
+            border-radius: 6px 6px 0 0;
+            margin-top: 5px;
+            text-shadow: 0 1px 0 rgba(255,255,255,0.8);
+            transition: all 0.1s;
+        }
+
+        .nav-btn:hover {
+            filter: brightness(1.05);
+            margin-top: 3px;
+            padding-top: 10px;
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(to bottom, #ffffff 0%, #f0f5fa 100%);
+            border-bottom: 2px solid #ffffff;
+            color: #000;
+            margin-bottom: -1px;
+            padding-bottom: 12px;
+            box-shadow: 0 -3px 8px rgba(0,0,0,0.15);
+        }
+
+        /* --- Unified Multi-Column Workspace --- */
+        main.workspace-grid {
+            max-width: 1800px;
+            margin: 0 auto;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 340px; /* Tighter sidebar */
+            gap: 20px; /* Reduced gap */
+            padding: 20px; /* Reduced overall padding */
+            flex-grow: 1;
+        }
+
+        /* --- Internal Boxes: Rounded & 3D --- */
+        .glass-box {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid #99aac0;
+            border-radius: var(--radius-ui);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            margin-bottom: 20px; /* Reduced margin */
+            overflow: hidden;
+            border-top: 1px solid #fff;
+            border-left: 1px solid #fff;
+        }
+
+        .box-header {
+            background: linear-gradient(to bottom, #72b0e8 0%, #4e92d2 50%, #2578c1 50%, #1a5ea3 100%);
+            color: white;
+            padding: 8px 20px;
+            font-weight: 700;
+            font-size: 15px;
+            text-shadow: 0 -1px 1px rgba(0,0,0,0.6);
+            border-bottom: 1px solid #0b2e4d;
+            position: relative;
+        }
+
+        .box-header::before {
+            content: '';
+            position: absolute;
+            top: 1px; left: 1px; right: 1px; height: 40%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
+            border-radius: 8px 8px 2px 2px;
+        }
+
+        .box-body {
+            padding: 20px; /* Significantly tighter padding */
+        }
+
+        .info-section h3 {
+            color: #003b75;
+            font-size: 18px; /* Denser headings */
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+
+        /* --- Sidebar Modules --- */
+        .sidebar-module {
+            background: linear-gradient(135deg, #f0f7ff, #dae6f5);
+            border: 1px solid #a0b5cc;
+            border-radius: var(--radius-ui);
+            padding: 15px; /* Tighter sidebar modules */
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        }
+
+        .sidebar-module h4 {
+            color: #003b75;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            padding-bottom: 3px;
+        }
+
+        /* --- The 3D GEL Button --- */
+        .elite-button {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 25px; /* Smaller buttons */
+            background: linear-gradient(to bottom, 
+                var(--vista-blue-top) 0%, 
+                var(--vista-blue-mid) 50%, 
+                var(--vista-blue-bottom) 50%, 
+                var(--vista-blue-dark) 100%
+            );
+            border: 1px solid #0b2e4d;
+            border-radius: 50px;
+            color: white;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3), inset 0 1px 1px rgba(255,255,255,0.4);
+            text-shadow: 0 -1px 1px rgba(0,0,0,0.5);
+            overflow: hidden;
+            font-size: 12px;
+            transition: transform 0.1s;
+        }
+
+        .elite-button::before {
+            content: '';
+            position: absolute;
+            top: 1px; left: 5%; width: 90%; height: 42%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.2) 100%);
+            border-radius: 40px 40px 10px 10px;
+        }
+
+        /* --- Graphics & Visuals --- */
+        .tech-visual {
+            width: 100%;
+            height: 220px; /* Shorter for density */
+            background-image: url('https://images.unsplash.com/photo-1558494949-ef010cbdcc48?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            margin-top: 15px;
+            border: 1px solid #fff;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .tech-tag {
+            display: inline-block;
+            background: #fff;
+            border: 1px solid #ccc;
+            padding: 3px 10px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 700;
+            margin: 2px;
+            color: #003b75;
+        }
+
+        .conduit-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px;
+            background: rgba(255,255,255,0.6);
+            border: 1px solid #c0d1e3;
+            border-radius: 6px;
+            color: #2a7abc;
+            text-decoration: none;
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-size: 12px;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: linear-gradient(to bottom, #2c3e50 0%, #000 100%);
+            color: #fff;
+            padding: 20px; /* Compact footer */
+            text-align: center;
+            font-size: 12px;
+            border-top: 3px solid #2a7abc;
+            flex-shrink: 0;
+        }
+
+        /* --- Liaison Terminal --- */
+        .terminal-box {
+            background: #fff;
+            border: 1px solid #bccad6;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .terminal-box code {
+            display: block;
+            padding: 10px;
+            background: #f0f5fa;
+            border: 1.5px solid #2a7abc;
+            border-radius: 6px;
+            color: #1a5ea3;
+            font-family: 'Consolas', monospace;
+            font-weight: 700;
+            margin-top: 10px;
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-wrapper">
+        <div class="main-container">
+            <!-- Corporate Header -->
+            <header>
+                <div class="header-flex">
+                    <div class="logo-group">
+                        <img src="https://i.postimg.cc/85mKDbX8/EliteSoftware-Company-Logo.png" alt="EliteSoftwareTech Logo" class="corporate-logo">
+                        <div class="brand-text">
+                            <h1>EliteSoftwareTech.cc</h1>
+                            <p>Information-First Engineering. Absolute System Purity.</p>
+                        </div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="display: flex; align-items: center; gap: 8px; color: #2ecc71; font-weight: 800; font-size: 11px;">
+                            <div style="width: 8px; height: 8px; background: #2ecc71; border-radius: 50%; box-shadow: 0 0 8px #2ecc71;"></div>
+                            CORE SYSTEMS: NOMINAL
+                        </div>
+                        <div style="font-size: 10px; color: #666; margin-top: 3px;">
+                            BUILD: 5.5.0.01_DENSE | UPDATED: 03-APR-2026
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Navigation Tabs -->
+            <nav class="nav-strip">
+                <button class="nav-btn active" onclick="showPage('home')">Welcome Station</button>
+                <button class="nav-btn" onclick="showPage('contact')">DIRECT LIAISON</button>
+            </nav>
+
+            <!-- Unified Workspace Grid -->
+            <main class="workspace-grid">
+                
+                <!-- Primary Information Column -->
+                <div class="main-column">
+                    
+                    <div id="page-home" class="page-view">
+                        <div class="glass-box">
+                            <div class="box-header">Executive Manifesto & Mission Protocol</div>
+                            <div class="box-body">
+                                <div class="info-section">
+                                    <h3>Information-First Engineering</h3>
+                                    <p>Welcome to <strong>EliteSoftwareTech.cc</strong>. Our engineering initiative rejects the modern "flat" movement in favor of skeuomorphic depth and absolute user agency. We believe software should be an immersive workstation environment, not a mobile-friendly toy.</p>
+                                </div>
+
+                                <div class="info-section">
+                                    <h3>The 2007-2026 Hybridization</h3>
+                                    <p>Blending the peak of <strong>Frutiger Aero</strong> (2007-2011) with the hardened, high-performance architectures of 2026. We are proving that power and beauty are not mutually exclusive.</p>
+                                </div>
+
+                                <div class="info-section">
+                                    <h3>Flagship Project: Aerexplorer</h3>
+                                    <p>Restoring functional and aesthetic purity to the Windows shell using kernel-level resource redirection and runtime DLL hooking.</p>
+                                    <div class="tech-visual"></div>
+                                </div>
+
+                                <div style="margin-top: 20px; display: flex; gap: 15px;">
+                                    <button class="elite-button" onclick="showPage('contact')">Establish Liaison</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="glass-box">
+                            <div class="box-header">Development Toolchain & Standards</div>
+                            <div class="box-body">
+                                <p>EliteSoftware operates with a zero-compromise approach to system purity. Scripts engineered in <strong>PowerShell 7</strong> ensure absolute telemetry. We leverage <strong>Windhawk</strong>, <strong>ExplorerPatcher</strong>, and <strong>SecureUXTheme</strong> to surgically alter the OS experience.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="page-contact" class="page-view" style="display:none;">
+                        <div class="glass-box">
+                            <div class="box-header">DIRECT LIAISON PROTOCOL</div>
+                            <div class="box-body">
+                                <p>Establish a secure communication channel with EliteSoftwareTech.cc below. All traffic is monitored for system integrity.</p>
+                                
+                                <div class="terminal-box">
+                                    <strong>Tier 1: General Operations & Support</strong>
+                                    <code>support@elitesoftwaretech.cc</code>
+                                </div>
+
+                                <div class="terminal-box" style="border-left: 5px solid #2980b9; margin-top: 15px;">
+                                    <strong>Tier 2: Direct Liaison (Zachary Whiteman)</strong>
+                                    <code>zachary.whiteman@elitesoftwaretech.cc</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Sidebar Column -->
+                <aside class="sidebar-column">
+                    
+                    <div class="sidebar-module">
+                        <h4>📡 Latest Telemetry</h4>
+                        <ul style="list-style: none; font-size: 11px; line-height: 1.4;">
+                            <li style="margin-bottom: 8px;"><strong>APR 03, 2026:</strong> Build 5.5.0 deployed. Density patch initialized. White space purged.</li>
+                            <li style="margin-bottom: 8px;"><strong>MAR 28, 2026:</strong> Aerexplorer v2.1 Alpha stable on 23H2 builds.</li>
+                            <li><strong>MAR 15, 2026:</strong> PowerShell automation suite enters final testing.</li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-module">
+                        <h4>🔗 Global Conduits</h4>
+                        <a href="https://github.com/TheShadyRainbow4" class="conduit-link" target="_blank">📂 GitHub Repository</a>
+                        <a href="https://www.patreon.com/cw/EliteSoftwareCo" class="conduit-link" target="_blank">💎 Patreon Support</a>
+                        <a href="https://www.youtube.com/channel/UCkCJHfNFwSAJ2fu4kXmEaUg" class="conduit-link" target="_blank">🎬 YouTube Channel</a>
+                    </div>
+
+                    <div class="sidebar-module">
+                        <h4>🛠️ Workstation Profile</h4>
+                        <div class="tech-tag">PowerShell 7.4</div>
+                        <div class="tech-tag">.NET 8.0</div>
+                        <div class="tech-tag">Windhawk</div>
+                        <div class="tech-tag">Win32 API</div>
+                        <div class="tech-tag">AutoHotkey v2</div>
+                        <div class="tech-tag">ExplorerPatcher</div>
+                    </div>
+
+                    <div class="sidebar-module" style="background: rgba(255,255,255,0.4); border-color: #3a6ea5;">
+                        <h4>📍 Node Status</h4>
+                        <p style="font-size: 12px;"><strong>Lead:</strong> Zachary Whiteman</p>
+                        <p style="font-size: 12px;"><strong>Region:</strong> Penn Yan, NY</p>
+                        <p style="font-size: 11px; margin-top: 5px; color: #003366; font-style: italic;">
+                            "Density is efficiency."
+                        </p>
+                    </div>
+
+                </aside>
+
+            </main>
+
+            <!-- Corporate Footer -->
+            <footer>
+                <div style="max-width: 1800px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                    <div>Copyright &copy; 2024-2026 EliteSoftwareTech.cc.</div>
+                    <div style="font-weight: 700; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.8);">
+                        Zachary Whiteman | Susan Gemm
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- System Modal -->
+    <div id="elite-modal" class="modal-overlay" style="position: fixed; inset: 0; background: rgba(0,25,60,0.7); backdrop-filter: blur(20px); display: none; align-items: center; justify-content: center; z-index: 9999;">
+        <div class="glass-box" style="width: 420px; margin: 0;">
+            <div class="box-header" id="modal-title">System Message</div>
+            <div class="box-body" style="text-align: center; padding: 25px;">
+                <p id="modal-message" style="font-size: 16px;">Process completed successfully.</p>
+                <div style="margin-top: 20px; display: flex; justify-content: flex-end; gap: 10px;">
+                    <button class="elite-button" onclick="closeModal()">Of Course</button>
+                    <button class="elite-button" style="background: linear-gradient(to bottom, #f55 0%, #d33 50%, #b11 50%, #900 100%); border-color: #600;" onclick="closeModal()">No Way!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.page-view').forEach(p => p.style.display = 'none');
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            const target = document.getElementById('page-' + pageId);
+            if(target) {
+                target.style.display = 'block';
+                target.style.opacity = '0';
+                setTimeout(() => { target.style.opacity = '1'; target.style.transition = 'opacity 0.2s ease'; }, 10);
+            }
+            const btn = document.querySelector(`[onclick="showPage('${pageId}')"]`);
+            if(btn) btn.classList.add('active');
+            window.scrollTo(0,0);
+        }
+
+        function closeModal() {
+            document.getElementById('elite-modal').style.display = 'none';
+        }
+
+        console.log("%c EliteSoftware Station %c DENSE %c Build 5.5.0.01 ", 
+            "color: white; background: #2a7abc; font-weight: bold; padding: 4px; border-radius: 4px 0 0 4px;", 
+            "color: white; background: #27ae60; padding: 4px;",
+            "color: #444; background: #eee; padding: 4px; border-radius: 0 4px 4px 0;");
+    </script>
+</body>
+</html>
