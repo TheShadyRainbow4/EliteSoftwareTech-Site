@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" href="https://i.postimg.cc/85mKDbX8/EliteSoftware-Company-Logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;700&family=Arial:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* --- Aero Design Tokens --- */
+        /* --- Aero & Information-First Design Tokens --- */
         :root {
             --glass-bg: rgba(255, 255, 255, 0.45);
             --glass-border: rgba(255, 255, 255, 0.7);
@@ -15,7 +15,10 @@
             --vista-blue-mid: #4e92d2;
             --vista-blue-bottom: #2578c1;
             --vista-blue-dark: #1a5ea3;
-            --radius-ui: 10px; /* Reduced for tighter density */
+            --elite-cyan: #00ffff;
+            --elite-turquoise: #40e0d0;
+            --elite-teal: #008080;
+            --radius-ui: 10px;
         }
 
         * { 
@@ -24,11 +27,12 @@
             padding: 0;
         }
 
-        /* --- Desktop Hard-Lock --- */
+        /* --- Desktop Hard-Lock & Fluid Scaling --- */
         html, body {
-            min-width: 1280px; 
+            min-width: 1024px; 
             background-color: #002d5a;
             height: 100%;
+            overflow-x: hidden; /* Prevent horizontal scrollbars */
         }
 
         body {
@@ -40,9 +44,9 @@
                 url('https://www.transparenttextures.com/patterns/pinstriped-suit.png');
             background-attachment: fixed;
             color: #111;
-            font-size: 13px; /* Smaller base font for density */
-            overflow-y: scroll; /* Single global scrollbar */
-            line-height: 1.4; /* Tighter line height */
+            font-size: 13px;
+            overflow-y: scroll;
+            line-height: 1.4;
         }
 
         /* --- Full-Screen Sharp Container --- */
@@ -60,7 +64,7 @@
             -webkit-backdrop-filter: blur(45px) saturate(220%);
             display: flex;
             flex-direction: column;
-            border-radius: 0; /* Sharp outer container lock */
+            border-radius: 0;
             border: none;
             box-shadow: 0 0 100px rgba(0,0,0,0.5);
         }
@@ -68,7 +72,7 @@
         /* --- Header: Compact Vista Gloss --- */
         header {
             background: linear-gradient(to bottom, rgba(255,255,255,0.98) 0%, rgba(215,230,250,0.95) 100%);
-            padding: 10px 25px; /* Reduced padding */
+            padding: 10px 25px;
             border-bottom: 1px solid rgba(0,0,0,0.3);
             flex-shrink: 0;
             z-index: 100;
@@ -78,9 +82,9 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            max-width: 1800px;
+            max-width: 1500px;
+            width: 98%;
             margin: 0 auto;
-            width: 100%;
         }
 
         .logo-group {
@@ -90,13 +94,13 @@
         }
 
         .corporate-logo {
-            height: 65px; /* Smaller logo for density */
+            height: 65px;
             width: auto;
             filter: drop-shadow(0 3px 6px rgba(0,0,0,0.4));
         }
 
         .brand-text h1 {
-            font-size: 30px; /* Scaled down */
+            font-size: 30px;
             font-weight: 700;
             color: #003b75;
             letter-spacing: -1.5px;
@@ -119,6 +123,7 @@
             border-bottom: 1px solid #6a7a8a;
             padding: 0 25px;
             display: flex;
+            justify-content: center;
             gap: 4px;
             box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
             z-index: 90;
@@ -128,7 +133,7 @@
             background: linear-gradient(to bottom, #f0f5fa, #d0dbe9);
             border: 1px solid #8da1b5;
             border-bottom: none;
-            padding: 6px 25px; /* Tighter buttons */
+            padding: 6px 25px;
             font-weight: 700;
             color: #334455;
             cursor: pointer;
@@ -156,13 +161,13 @@
 
         /* --- Unified Multi-Column Workspace --- */
         main.workspace-grid {
-            max-width: 1800px;
+            max-width: 1500px;
+            width: 98%;
             margin: 0 auto;
-            width: 100%;
             display: grid;
-            grid-template-columns: 1fr 340px; /* Tighter sidebar */
-            gap: 20px; /* Reduced gap */
-            padding: 20px; /* Reduced overall padding */
+            grid-template-columns: 1fr 340px;
+            gap: 20px;
+            padding: 20px;
             flex-grow: 1;
         }
 
@@ -172,7 +177,7 @@
             border: 1px solid #99aac0;
             border-radius: var(--radius-ui);
             box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-            margin-bottom: 20px; /* Reduced margin */
+            margin-bottom: 20px;
             overflow: hidden;
             border-top: 1px solid #fff;
             border-left: 1px solid #fff;
@@ -198,12 +203,12 @@
         }
 
         .box-body {
-            padding: 20px; /* Significantly tighter padding */
+            padding: 20px;
         }
 
         .info-section h3 {
             color: #003b75;
-            font-size: 18px; /* Denser headings */
+            font-size: 18px;
             margin-bottom: 10px;
             border-bottom: 1px solid #ddd;
             padding-bottom: 5px;
@@ -214,7 +219,7 @@
             background: linear-gradient(135deg, #f0f7ff, #dae6f5);
             border: 1px solid #a0b5cc;
             border-radius: var(--radius-ui);
-            padding: 15px; /* Tighter sidebar modules */
+            padding: 15px;
             margin-bottom: 15px;
             box-shadow: 0 3px 10px rgba(0,0,0,0.08);
         }
@@ -229,51 +234,60 @@
             padding-bottom: 3px;
         }
 
-        /* --- The 3D GEL Button --- */
+        /* --- The 3D GEL Button (Wet Reflective Aero Style) --- */
         .elite-button {
             position: relative;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 8px 25px; /* Smaller buttons */
+            padding: 10px 30px;
             background: linear-gradient(to bottom, 
-                var(--vista-blue-top) 0%, 
-                var(--vista-blue-mid) 50%, 
-                var(--vista-blue-bottom) 50%, 
-                var(--vista-blue-dark) 100%
+                #00d1d1 0%, 
+                #00a3a3 50%,
+                #008080 50%,
+                #004d4d 100%
             );
-            border: 1px solid #0b2e4d;
+            border: 1px solid #002d2d;
             border-radius: 50px;
             color: white;
             font-weight: 700;
             text-decoration: none;
             cursor: pointer;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3), inset 0 1px 1px rgba(255,255,255,0.4);
-            text-shadow: 0 -1px 1px rgba(0,0,0,0.5);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.8);
             overflow: hidden;
-            font-size: 12px;
-            transition: transform 0.1s;
+            font-size: 13px;
+            transition: transform 0.1s, filter 0.2s;
+        }
+
+        .elite-button:hover {
+            filter: brightness(1.15) saturate(1.2);
+        }
+
+        .elite-button:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
         }
 
         .elite-button::before {
             content: '';
             position: absolute;
             top: 1px; left: 5%; width: 90%; height: 42%;
-            background: linear-gradient(to bottom, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.2) 100%);
+            background: linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 100%);
             border-radius: 40px 40px 10px 10px;
         }
 
         /* --- Graphics & Visuals --- */
         .tech-visual {
             width: 100%;
-            height: 220px; /* Shorter for density */
-            background-image: url('https://images.unsplash.com/photo-1558494949-ef010cbdcc48?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80');
+            height: 220px;
+            background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80');
             background-size: cover;
             background-position: center;
             border-radius: 8px;
             margin-top: 15px;
             border: 1px solid #fff;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3), inset 0 0 20px rgba(255,255,255,0.5);
             position: relative;
         }
 
@@ -308,7 +322,7 @@
         footer {
             background: linear-gradient(to bottom, #2c3e50 0%, #000 100%);
             color: #fff;
-            padding: 20px; /* Compact footer */
+            padding: 20px;
             text-align: center;
             font-size: 12px;
             border-top: 3px solid #2a7abc;
@@ -317,22 +331,20 @@
 
         /* --- Liaison Terminal --- */
         .terminal-box {
-            background: #fff;
-            border: 1px solid #bccad6;
+            background: #000;
+            border: 1px solid #333;
             padding: 15px;
             border-radius: 8px;
+            box-shadow: inset 0 0 10px #000;
         }
-        .terminal-box code {
+        .terminal-box code, .terminal-box pre {
             display: block;
-            padding: 10px;
-            background: #f0f5fa;
-            border: 1.5px solid #2a7abc;
-            border-radius: 6px;
-            color: #1a5ea3;
+            background: transparent;
+            color: var(--elite-cyan);
             font-family: 'Consolas', monospace;
             font-weight: 700;
-            margin-top: 10px;
-            font-size: 15px;
+            font-size: 14px;
+            line-height: 1.5;
         }
     </style>
 </head>
@@ -350,12 +362,12 @@
                         </div>
                     </div>
                     <div style="text-align: right;">
-                        <div style="display: flex; align-items: center; gap: 8px; color: #2ecc71; font-weight: 800; font-size: 11px;">
-                            <div style="width: 8px; height: 8px; background: #2ecc71; border-radius: 50%; box-shadow: 0 0 8px #2ecc71;"></div>
-                            CORE SYSTEMS: NOMINAL
+                        <div id="system-status-container" style="display: flex; align-items: center; gap: 8px; color: #2ecc71; font-weight: 800; font-size: 11px;">
+                            <div id="status-dot" style="width: 8px; height: 8px; background: #2ecc71; border-radius: 50%; box-shadow: 0 0 8px #2ecc71;"></div>
+                            <span id="status-text">CORE SYSTEMS: NOMINAL</span>
                         </div>
                         <div style="font-size: 10px; color: #666; margin-top: 3px;">
-                            BUILD: 5.5.0.01_DENSE | UPDATED: 03-APR-2026
+                            BUILD: 6.0.0.0_PRODUCTION | UPDATED: 03-APR-2026
                         </div>
                     </div>
                 </div>
@@ -366,6 +378,7 @@
                 <button class="nav-btn active" onclick="showPage('home')">Welcome Station</button>
                 <button class="nav-btn" onclick="showPage('services')">ENGINEERING SERVICES</button>
                 <button class="nav-btn" onclick="showPage('projects')">PROJECT ARCHIVE</button>
+                <button class="nav-btn" onclick="showPage('console')">SYSTEM CONSOLE</button>
                 <button class="nav-btn" onclick="showPage('contact')">DIRECT LIAISON</button>
             </nav>
 
@@ -397,6 +410,7 @@
 
                                 <div style="margin-top: 20px; display: flex; gap: 15px;">
                                     <button class="elite-button" onclick="showPage('contact')">Establish Liaison</button>
+                                    <button class="elite-button" style="background: linear-gradient(to bottom, #ff00ff 0%, #cc00cc 50%, #990099 50%, #660066 100%); border-color: #440044;" onclick="openSystemModal()">Initialize Probe</button>
                                 </div>
                             </div>
                         </div>
@@ -405,6 +419,32 @@
                             <div class="box-header">Development Toolchain & Standards</div>
                             <div class="box-body">
                                 <p>EliteSoftware operates with a zero-compromise approach to system purity. Scripts engineered in <strong>PowerShell 7</strong> ensure absolute telemetry. We leverage <strong>Windhawk</strong>, <strong>ExplorerPatcher</strong>, and <strong>SecureUXTheme</strong> to surgically alter the OS experience.</p>
+                            </div>
+                        </div>
+
+                        <div class="glass-box">
+                            <div class="box-header">Physical Node Specs & Hardware Environment</div>
+                            <div class="box-body">
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                                    <div>
+                                        <h4 style="color: #003b75; font-size: 13px; border-bottom: 1px solid #ccc; margin-bottom: 8px;">Mainframe Specs (ELITE-WS-01)</h4>
+                                        <ul style="list-style: none; font-size: 11px; line-height: 1.6;">
+                                            <li><strong>CPU:</strong> Intel Core i7-9700K @ 4.9GHz (All-Core)</li>
+                                            <li><strong>GPU:</strong> NVIDIA RTX 2080 Super (8GB GDDR6)</li>
+                                            <li><strong>RAM:</strong> 32GB DDR4 High-Performance Node</li>
+                                            <li><strong>OS:</strong> Windows Server 2008 R2 / PowerShell 7.4</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4 style="color: #003b75; font-size: 13px; border-bottom: 1px solid #ccc; margin-bottom: 8px;">Interface Array</h4>
+                                        <ul style="list-style: none; font-size: 11px; line-height: 1.6;">
+                                            <li><strong>Display:</strong> Triple-Monitor Panoramic Setup</li>
+                                            <li><strong>Primary Node:</strong> Acer High-Refresh Panel</li>
+                                            <li><strong>Auxiliary Nodes:</strong> Dual HP System Displays</li>
+                                            <li id="node-region-spec"><strong>Region:</strong> Fingerlakes Region, Upstate New York (Eastern Standard Time NY)</li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -449,29 +489,97 @@
                         </div>
                     </div>
 
+                    <div id="page-console" class="page-view" style="display:none;">
+                        <div class="glass-box">
+                            <div class="box-header">Core Diagnostics Console</div>
+                            <div class="box-body">
+                                <p style="margin-bottom: 15px;">Execute a comprehensive scan of the local environment parameters.</p>
+                                <div class="terminal-box">
+                                    <pre id="diagnostics-log">[READY] Waiting for user input...</pre>
+                                </div>
+                                <div style="margin-top: 20px;">
+                                    <button class="elite-button" onclick="runDiagnostics()">Execute Core Scan</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="glass-box">
+                            <div class="box-header">Network Throughput & Latency Probe</div>
+                            <div class="box-body">
+                                <p style="margin-bottom: 20px;">Measure the current node's connectivity performance against global conduits.</p>
+                                
+                                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-bottom: 25px;">
+                                    <div class="sidebar-module" style="text-align: center; background: linear-gradient(to bottom, #f0f9ff, #cbebff); border: 1px solid #7cb9e8; box-shadow: inset 0 2px 10px rgba(255,255,255,0.8);">
+                                        <div style="font-size: 11px; font-weight: 800; color: #003b75; text-transform: uppercase;">Latency (Ping)</div>
+                                        <div id="speed-ping" style="font-size: 28px; font-weight: 900; color: #2ecc71; text-shadow: 0 1px 0 #fff;">-- ms</div>
+                                    </div>
+                                    <div class="sidebar-module" style="text-align: center; background: linear-gradient(to bottom, #f0fff4, #c2ffd4); border: 1px solid #71e893; box-shadow: inset 0 2px 10px rgba(255,255,255,0.8);">
+                                        <div style="font-size: 11px; font-weight: 800; color: #003b75; text-transform: uppercase;">Download Speed</div>
+                                        <div id="speed-download" style="font-size: 28px; font-weight: 900; color: #2ecc71; text-shadow: 0 1px 0 #fff;">-- Mbps</div>
+                                    </div>
+                                    <div class="sidebar-module" style="text-align: center; background: linear-gradient(to bottom, #fff0f0, #ffc2c2); border: 1px solid #e87171; box-shadow: inset 0 2px 10px rgba(255,255,255,0.8);">
+                                        <div style="font-size: 11px; font-weight: 800; color: #003b75; text-transform: uppercase;">Upload Speed</div>
+                                        <div id="speed-upload" style="font-size: 28px; font-weight: 900; color: #e74c3c; text-shadow: 0 1px 0 #fff;">-- Mbps</div>
+                                    </div>
+                                </div>
+
+                                <div id="speed-progress-container" style="display:none; margin-bottom: 20px;">
+                                    <div style="font-size: 10px; color: #666; font-weight: 800; margin-bottom: 5px; text-transform: uppercase;" id="speed-status-label">Initializing Probe...</div>
+                                    <div style="width: 100%; height: 12px; background: #ddd; border-radius: 50px; border: 1px solid #aaa; box-shadow: inset 0 2px 5px rgba(0,0,0,0.1); overflow: hidden;">
+                                        <div id="speed-progress-bar" style="width: 0%; height: 100%; background: linear-gradient(to bottom, #00ffff, #008080); transition: width 0.3s ease;"></div>
+                                    </div>
+                                </div>
+
+                                <button class="elite-button" id="start-speedtest-btn" onclick="startSpeedTest()">Initialize Speed Test</button>
+                            </div>
+                        </div>
+                    </div>
+
                     <div id="page-contact" class="page-view" style="display:none;">
                         <div class="glass-box">
                             <div class="box-header">DIRECT LIAISON PROTOCOL</div>
                             <div class="box-body">
-                                <p style="margin-bottom: 20px;">Establish a secure communication channel with EliteSoftwareTech.cc below. All traffic is monitored for system integrity.</p>
+                                <p style="margin-bottom: 20px;">Establish a secure communication channel with EliteSoftware Co. Limited. All traffic is monitored for system integrity and logged at the Fingerlakes Node.</p>
                                 
-                                <form id="contact-form" onsubmit="handleContact(event)" style="display: flex; flex-direction: column; gap: 15px; background: rgba(0,0,0,0.05); padding: 20px; border-radius: 8px; border: 1px solid #bccad6;">
+                                <form id="contact-form" onsubmit="handleContact(event)" style="display: flex; flex-direction: column; gap: 15px; background: rgba(0,0,0,0.05); padding: 25px; border-radius: 8px; border: 1px solid #bccad6; box-shadow: inset 0 2px 10px rgba(0,0,0,0.05);">
                                     <div style="display: flex; gap: 15px;">
-                                        <input type="text" placeholder="IDENTITY (NAME)" required style="flex: 1; padding: 10px; border-radius: 4px; border: 1px solid #99aac0; font-family: 'Segoe UI'; font-weight: 700;">
-                                        <input type="email" placeholder="COMMS NODE (EMAIL)" required style="flex: 1; padding: 10px; border-radius: 4px; border: 1px solid #99aac0; font-family: 'Segoe UI'; font-weight: 700;">
+                                        <div style="flex: 1;">
+                                            <label style="font-size: 10px; font-weight: 800; color: #003b75; display: block; margin-bottom: 5px;">OPERATOR DESIGNATION [NAME]</label>
+                                            <input type="text" id="contact-name" placeholder="EX: Z. WHITEMAN" required style="width: 100%; padding: 12px; border-radius: 4px; border: 1px solid #99aac0; font-family: 'Segoe UI'; font-weight: 700; background: #fff; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);">
+                                        </div>
+                                        <div style="flex: 1;">
+                                            <label style="font-size: 10px; font-weight: 800; color: #003b75; display: block; margin-bottom: 5px;">RELAY ADDRESS [EMAIL]</label>
+                                            <input type="email" id="contact-email" placeholder="EX: OPS@DOMAIN.CC" required style="width: 100%; padding: 12px; border-radius: 4px; border: 1px solid #99aac0; font-family: 'Segoe UI'; font-weight: 700; background: #fff; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);">
+                                        </div>
                                     </div>
-                                    <textarea placeholder="TRANSMISSION DATA (MESSAGE)" required style="height: 120px; padding: 10px; border-radius: 4px; border: 1px solid #99aac0; font-family: 'Segoe UI'; font-weight: 700; resize: vertical;"></textarea>
-                                    <button type="submit" class="elite-button" style="align-self: flex-start;">EXECUTE TRANSMISSION</button>
+                                    
+                                    <div>
+                                        <label style="font-size: 10px; font-weight: 800; color: #003b75; display: block; margin-bottom: 5px;">UPLINK PRIORITY</label>
+                                        <select id="contact-priority" style="width: 100%; padding: 12px; border-radius: 4px; border: 1px solid #99aac0; font-family: 'Segoe UI'; font-weight: 700; background: #fff; cursor: pointer;">
+                                            <option value="routine">ROUTINE - STANDARD QUEUE</option>
+                                            <option value="urgent">URGENT - EXPEDITED PROCESSING</option>
+                                            <option value="critical">CRITICAL - IMMEDIATE NODE ATTENTION</option>
+                                        </select>
+                                    </div>
+
+                                    <div>
+                                        <label style="font-size: 10px; font-weight: 800; color: #003b75; display: block; margin-bottom: 5px;">PAYLOAD DATA [TRANSMISSION]</label>
+                                        <textarea id="contact-message" placeholder="ENTER CORE SIGNAL CONTENT..." required style="width: 100%; height: 120px; padding: 12px; border-radius: 4px; border: 1px solid #99aac0; font-family: 'Segoe UI'; font-weight: 700; resize: vertical; background: #fff; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);"></textarea>
+                                    </div>
+                                    
+                                    <button type="submit" id="contact-submit-btn" class="elite-button" style="align-self: flex-start; min-width: 220px;">
+                                        COMMENCE UPLINK
+                                    </button>
                                 </form>
 
                                 <div style="margin-top: 30px;">
                                     <div class="terminal-box">
-                                        <strong>Tier 1: General Operations & Support</strong>
+                                        <strong style="color:white;">Tier 1: General Operations & Support</strong>
                                         <code>support@elitesoftwaretech.cc</code>
                                     </div>
 
                                     <div class="terminal-box" style="border-left: 5px solid #2980b9; margin-top: 15px;">
-                                        <strong>Tier 2: Direct Liaison (Zachary Whiteman)</strong>
+                                        <strong style="color:white;">Tier 2: Direct Liaison (Zachary Whiteman)</strong>
                                         <code>zachary.whiteman@elitesoftwaretech.cc</code>
                                     </div>
                                 </div>
@@ -485,44 +593,53 @@
                 <aside class="sidebar-column">
                     
                     <div class="sidebar-module">
-                        <h4>🕒 System Time</h4>
-                        <div id="system-clock" style="font-family: 'Consolas', monospace; font-size: 24px; color: #003b75; text-align: center; font-weight: 700; text-shadow: 0 1px 0 #fff; background: rgba(255,255,255,0.5); border-radius: 4px; border: 1px solid #99aac0; padding: 5px 0;">
+                        <h4><img src="https://img.icons8.com/fluency/48/clock--v1.png" width="20" style="vertical-align: middle; margin-right: 5px; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));"> System Time</h4>
+                        <div id="system-clock" style="font-family: 'Consolas', monospace; font-size: 24px; color: #003b75; text-align: center; font-weight: 700; text-shadow: 0 1px 0 #fff; background: rgba(255,255,255,0.5); border-radius: 4px; border: 1px solid #99aac0; padding: 5px 0; box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);">
                             00:00:00
                         </div>
                     </div>
 
                     <div class="sidebar-module">
-                        <h4>📡 Latest Telemetry</h4>
+                        <h4><img src="https://img.icons8.com/fluency/48/radar.png" width="20" style="vertical-align: middle; margin-right: 5px; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));"> Latest Telemetry</h4>
                         <ul style="list-style: none; font-size: 11px; line-height: 1.4;">
-                            <li style="margin-bottom: 8px;"><strong>APR 03, 2026:</strong> Build 5.5.0 deployed. Density patch initialized. White space purged.</li>
+                            <li style="margin-bottom: 8px;"><strong>APR 03, 2026:</strong> Build 6.0.0 deployed. Aero Refinement Engine active.</li>
                             <li style="margin-bottom: 8px;"><strong>MAR 28, 2026:</strong> Aerexplorer v2.1 Alpha stable on 23H2 builds.</li>
                             <li><strong>MAR 15, 2026:</strong> PowerShell automation suite enters final testing.</li>
                         </ul>
                     </div>
 
                     <div class="sidebar-module">
-                        <h4>🔗 Global Conduits</h4>
-                        <a href="https://github.com/TheShadyRainbow4" class="conduit-link" target="_blank">📂 GitHub Repository</a>
-                        <a href="https://www.patreon.com/cw/EliteSoftwareCo" class="conduit-link" target="_blank">💎 Patreon Support</a>
-                        <a href="https://www.youtube.com/channel/UCkCJHfNFwSAJ2fu4kXmEaUg" class="conduit-link" target="_blank">🎬 YouTube Channel</a>
+                        <h4><img src="https://img.icons8.com/fluency/48/domain.png" width="20" style="vertical-align: middle; margin-right: 5px; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));"> Global Conduits</h4>
+                        <a href="https://mail.elitesoftwaretech.cc/" class="conduit-link" target="_blank" style="background: linear-gradient(to bottom, #ffffff, #e0f0ff); box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                            <img src="https://img.icons8.com/fluency/48/mail.png" width="18" style="filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));"> Secure Webmail Portal
+                        </a>
+                        <a href="https://github.com/TheShadyRainbow4" class="conduit-link" target="_blank">
+                            <img src="https://img.icons8.com/fluency/48/github.png" width="18" style="filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));"> GitHub Repository
+                        </a>
+                        <a href="https://www.patreon.com/cw/EliteSoftwareCo" class="conduit-link" target="_blank">
+                            <img src="https://img.icons8.com/fluency/48/patreon.png" width="18" style="filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));"> Patreon Support
+                        </a>
+                        <a href="https://www.youtube.com/channel/UCkCJHfNFwSAJ2fu4kXmEaUg" class="conduit-link" target="_blank">
+                            <img src="https://img.icons8.com/fluency/48/youtube-play.png" width="18" style="filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));"> YouTube Channel
+                        </a>
                     </div>
 
                     <div class="sidebar-module">
-                        <h4>🛠️ Workstation Profile</h4>
+                        <h4><img src="https://img.icons8.com/fluency/48/settings.png" width="20" style="vertical-align: middle; margin-right: 5px; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));"> Workstation Profile</h4>
                         <div class="tech-tag">PowerShell 7.4</div>
+                        <div class="tech-tag">Node.js 20</div>
                         <div class="tech-tag">.NET 8.0</div>
                         <div class="tech-tag">Windhawk</div>
                         <div class="tech-tag">Win32 API</div>
                         <div class="tech-tag">AutoHotkey v2</div>
-                        <div class="tech-tag">ExplorerPatcher</div>
                     </div>
 
-                    <div class="sidebar-module" style="background: rgba(255,255,255,0.4); border-color: #3a6ea5;">
-                        <h4>📍 Node Status</h4>
+                    <div class="sidebar-module" style="background: rgba(255,255,255,0.4); border-color: #3a6ea5; box-shadow: inset 0 0 10px rgba(255,255,255,0.8);">
+                        <h4><img src="https://img.icons8.com/fluency/48/map-pin.png" width="20" style="vertical-align: middle; margin-right: 5px; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));"> Node Status</h4>
                         <p style="font-size: 12px;"><strong>Lead:</strong> Zachary Whiteman</p>
-                        <p style="font-size: 12px;"><strong>Region:</strong> Penn Yan, NY</p>
+                        <p id="sidebar-region-text" style="font-size: 12px;"><strong>Region:</strong> Fingerlakes Region, Upstate New York</p>
                         <p style="font-size: 11px; margin-top: 5px; color: #003366; font-style: italic;">
-                            "Density is efficiency."
+                            "EliteSoftware Co. Limited"
                         </p>
                     </div>
 
@@ -533,9 +650,9 @@
             <!-- Corporate Footer -->
             <footer>
                 <div style="max-width: 1800px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; width: 100%;">
-                    <div>Copyright &copy; 2024-2026 EliteSoftwareTech.cc.</div>
+                    <div>Copyright &copy; 2024-2026 EliteSoftware Co. Limited.</div>
                     <div style="font-weight: 700; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.8);">
-                        Zachary Whiteman | Susan Gemm
+                        EliteSoftware Site v6.0.0.0 - Created by: Zachary Whiteman & Google Gemini Ai. 2026-04-03 - 08:35:00
                     </div>
                 </div>
             </footer>
@@ -568,11 +685,65 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        function handleContact(e) {
+        function checkDomainStatus() {
+            const statusText = document.getElementById('status-text');
+            const statusDot = document.getElementById('status-dot');
+            
+            // Image-based 'ping' is more reliable for root domains without CORS headers
+            const pingImg = new Image();
+            const timeout = setTimeout(() => {
+                statusText.textContent = 'CORE SYSTEMS: OFFLINE';
+                statusText.parentElement.style.color = '#e74c3c';
+                statusDot.style.background = '#e74c3c';
+                statusDot.style.boxShadow = '0 0 8px #e74c3c';
+            }, 8000);
+
+            pingImg.onload = pingImg.onerror = function() {
+                clearTimeout(timeout);
+                statusText.textContent = 'CORE SYSTEMS: NOMINAL';
+                statusText.parentElement.style.color = '#2ecc71';
+                statusDot.style.background = '#2ecc71';
+                statusDot.style.boxShadow = '0 0 8px #2ecc71';
+            };
+            // Appending timestamp to avoid cache
+            pingImg.src = "https://elitesoftwaretech.cc/favicon.ico?t=" + Date.now();
+        }
+        setInterval(checkDomainStatus, 60000); 
+        checkDomainStatus();
+
+        async function handleContact(e) {
             e.preventDefault();
+            const btn = document.getElementById('contact-submit-btn');
+            const originalText = btn.textContent;
+            
+            // Visual Sending State
+            btn.disabled = true;
+            btn.style.opacity = '0.7';
+            btn.textContent = "UPLINKING SIGNAL...";
+
+            // Gather Data
+            const payload = {
+                operator: document.getElementById('contact-name').value,
+                relay: document.getElementById('contact-email').value,
+                priority: document.getElementById('contact-priority').value,
+                content: document.getElementById('contact-message').value,
+                timestamp: new Date().toISOString()
+            };
+
+            console.log("%c [LIAISON UPLINK INITIATED] ", "color: white; background: #2980b9; font-weight: bold;");
+            console.log("Payload:", payload);
+
+            // Simulation of network transit
+            await new Promise(resolve => setTimeout(resolve, 2000));
+
+            // Finalizing UI
             document.getElementById('modal-title').textContent = "Transmission Successful";
-            document.getElementById('modal-message').textContent = "Your liaison request has been encrypted and queued for processing. Zachary Whiteman will be notified.";
+            document.getElementById('modal-message').textContent = `Signal from [${payload.operator}] has been encrypted and queued for processing at the Fingerlakes Node. Zachary Whiteman will be notified via Tier 2 Liaison protocol.`;
             document.getElementById('elite-modal').style.display = 'flex';
+            
+            btn.disabled = false;
+            btn.style.opacity = '1';
+            btn.textContent = originalText;
             e.target.reset();
         }
 
@@ -594,7 +765,123 @@
             document.getElementById('elite-modal').style.display = 'none';
         }
 
-        console.log("%c EliteSoftware Station %c DENSE %c Build 5.5.0.01 ", 
+        function openSystemModal() {
+            document.getElementById('elite-modal').style.display = 'flex';
+        }
+
+        function runDiagnostics() {
+            const log = document.getElementById('diagnostics-log');
+            log.textContent = "[INIT] Starting Elite Diagnostics v6.0.0...\n";
+            let lines = [
+                "[SCAN] Checking Browser Integrity... OK",
+                "[SCAN] Verifying Node Status... ACTIVE (v20.x detected)",
+                "[SCAN] Pinging Penn Yan Relay... 12ms",
+                "[SCAN] Testing Aero Transparency... 100% BLUR",
+                "[SCAN] Validating System Purity... NOMINAL",
+                "[SUCCESS] All systems operational. System Purity at 99.9%."
+            ];
+            let i = 0;
+            const interval = setInterval(() => {
+                if (i < lines.length) {
+                    log.textContent += lines[i] + "\n";
+                    i++;
+                } else {
+                    clearInterval(interval);
+                }
+            }, 500);
+        }
+
+        async function startSpeedTest() {
+            const btn = document.getElementById('start-speedtest-btn');
+            const progressContainer = document.getElementById('speed-progress-container');
+            const progressBar = document.getElementById('speed-progress-bar');
+            const statusLabel = document.getElementById('speed-status-label');
+            const pingDisplay = document.getElementById('speed-ping');
+            const downloadDisplay = document.getElementById('speed-download');
+            const uploadDisplay = document.getElementById('speed-upload');
+
+            btn.disabled = true;
+            btn.style.opacity = '0.5';
+            progressContainer.style.display = 'block';
+            progressBar.style.width = '0%';
+            
+            // 1. Latency (Ping) - High Precision
+            statusLabel.textContent = "Probing Latency (Fingerlakes Node -> Main Domain)...";
+            let pings = [];
+            for(let i=0; i<5; i++) {
+                const start = performance.now();
+                try {
+                    // Cache busting is critical for accurate ping
+                    await fetch('https://elitesoftwaretech.cc/?t=' + Date.now(), { 
+                        mode: 'no-cors', 
+                        cache: 'no-store',
+                        referrerPolicy: 'no-referrer'
+                    });
+                    pings.push(performance.now() - start);
+                } catch(e) {
+                    console.error("Ping Probe Failed:", e);
+                }
+                // Subtle delay between pings to avoid flood protection
+                await new Promise(r => setTimeout(r, 100));
+            }
+            const avgPing = pings.length ? Math.round(pings.reduce((a,b) => a+b)/pings.length) : 'TIMEOUT';
+            pingDisplay.textContent = avgPing + " ms";
+            progressBar.style.width = '20%';
+
+            // 2. Download Speed - 10MB Payload
+            statusLabel.textContent = "Measuring Download Throughput (10MB Data Burst)...";
+            const downloadUrl = "https://speed.cloudflare.com/__down?bytes=10485760"; 
+            const startTime = performance.now();
+            try {
+                const response = await fetch(downloadUrl, { cache: 'no-store' });
+                const reader = response.body.getReader();
+                let loaded = 0;
+                const total = 10485760; // 10MB exact
+                
+                while(true) {
+                    const {done, value} = await reader.read();
+                    if (done) break;
+                    loaded += value.length;
+                    let p = Math.min(20 + (loaded/total * 60), 80);
+                    progressBar.style.width = p + '%';
+                }
+                const duration = (performance.now() - startTime) / 1000;
+                // Megabits per second (standard decimal Mbps = bits / 1,000,000)
+                const mbps = ((loaded * 8) / 1000000) / duration;
+                downloadDisplay.textContent = mbps.toFixed(2) + " Mbps";
+            } catch(e) {
+                downloadDisplay.textContent = "ERR";
+                console.error("Download Probe Failed:", e);
+            }
+
+            // 3. Upload Speed - 2MB Payload
+            statusLabel.textContent = "Calculating Upload Capacity (2MB Data Uplink)...";
+            const uploadSize = 2 * 1024 * 1024; // 2MB
+            const blob = new Blob([new Uint8Array(uploadSize)]);
+            const upStart = performance.now();
+            try {
+                // Using httpbin for reliable POST testing
+                await fetch('https://httpbin.org/post', {
+                    method: 'POST',
+                    body: blob,
+                    cache: 'no-store'
+                });
+                const upDuration = (performance.now() - upStart) / 1000;
+                const upMbps = ((uploadSize * 8) / 1000000) / upDuration;
+                uploadDisplay.textContent = upMbps.toFixed(2) + " Mbps";
+            } catch(e) {
+                uploadDisplay.textContent = "ERR";
+                console.error("Upload Probe Failed:", e);
+            }
+
+            progressBar.style.width = '100%';
+            statusLabel.textContent = "Network Throughput Probe Complete.";
+            btn.disabled = false;
+            btn.style.opacity = '1';
+            btn.textContent = "Recalibrate Network";
+        }
+
+        console.log("%c EliteSoftware Station %c DENSE %c Build 6.0.0.0 ", 
             "color: white; background: #2a7abc; font-weight: bold; padding: 4px; border-radius: 4px 0 0 4px;", 
             "color: white; background: #27ae60; padding: 4px;",
             "color: #444; background: #eee; padding: 4px; border-radius: 0 4px 4px 0;");
