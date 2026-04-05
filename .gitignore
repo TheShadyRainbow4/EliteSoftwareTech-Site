@@ -9,3 +9,5 @@ C:\inetpub\HTML-SINGLE_PAGE-ONLY\EliteSoftwareTech-Site\backups\.IMPORTANT
 *.bak
 *.OLD
 *.IMPORTANT
+Thumbs.db
+*.db
